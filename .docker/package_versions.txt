@@ -1,0 +1,63 @@
+#0 building with "default" instance using docker driver
+
+#1 [bot internal] load build definition from Dockerfile
+#1 transferring dockerfile:
+#1 transferring dockerfile: 2.22kB done
+#1 DONE 1.1s
+
+#2 [bot internal] load metadata for docker.io/nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+#2 DONE 3.4s
+
+#3 [bot internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.1s
+
+#4 [bot  1/14] FROM docker.io/nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04@sha256:85fb7ac694079fff1061a0140fd5b5a641997880e12112d92589c3bbb1e8b7ca
+#4 DONE 0.0s
+
+#5 [bot  3/14] RUN apt-get update && apt-get install -y     python3-pip     git     libgl1-mesa-glx     libglib2.0-0     && rm -rf /var/lib/apt/lists/*
+#5 CACHED
+
+#6 [bot  4/14] RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+#6 CACHED
+
+#7 [bot  2/14] WORKDIR /app
+#7 CACHED
+
+#8 [bot  5/14] RUN apt-get update &&     apt-cache policy nvidia-cuda-toolkit libcudnn8 libcudnn8-dev > /tmp/package_versions.txt &&     cat /tmp/package_versions.txt
+#8 CACHED
+
+#9 [bot internal] load build context
+#9 transferring context: 329B done
+#9 DONE 0.2s
+
+#10 [bot  6/14] RUN apt-get update &&     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends     --allow-change-held-packages     nvidia-cuda-toolkit=11.8.0-1     libcudnn8=8.6.0.163-1+cuda11.8     libcudnn8-dev=8.6.0.163-1+cuda11.8     && rm -rf /var/lib/apt/lists/*
+#10 1.295 Hit:1 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64  InRelease
+#10 1.340 Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+#10 1.340 Get:3 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+#10 1.502 Get:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+#10 2.271 Hit:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+#10 2.366 Fetched 257 kB in 1s (186 kB/s)
+#10 2.366 Reading package lists...
+#10 3.389 Reading package lists...
+#10 4.430 Building dependency tree...
+#10 4.650 Reading state information...
+#10 4.655 Package nvidia-cuda-toolkit is not available, but is referred to by another package.
+#10 4.655 This may mean that the package is missing, has been obsoleted, or
+#10 4.655 is only available from another source
+#10 4.655 
+#10 4.660 E: Version '11.8.0-1' for 'nvidia-cuda-toolkit' was not found
+#10 ERROR: process "/bin/sh -c apt-get update &&     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends     --allow-change-held-packages     nvidia-cuda-toolkit=11.8.0-1     libcudnn8=8.6.0.163-1+cuda11.8     libcudnn8-dev=8.6.0.163-1+cuda11.8     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+------
+ > [bot  6/14] RUN apt-get update &&     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends     --allow-change-held-packages     nvidia-cuda-toolkit=11.8.0-1     libcudnn8=8.6.0.163-1+cuda11.8     libcudnn8-dev=8.6.0.163-1+cuda11.8     && rm -rf /var/lib/apt/lists/*:
+1.502 Get:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+2.271 Hit:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease
+
+
+
+4.655 Package nvidia-cuda-toolkit is not available, but is referred to by another package.
+4.655 This may mean that the package is missing, has been obsoleted, or
+4.655 is only available from another source
+4.655 
+4.660 E: Version '11.8.0-1' for 'nvidia-cuda-toolkit' was not found
+------

@@ -1,0 +1,103 @@
+services:
+  bot:
+    runtime: nvidia
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+    env_file:
+      - ../.env
+    volumes:
+      - ../src:/app/src
+      - ../fotos:/app/fotos
+      - ../debug:/app/debug
+      - ../model:/app/model
+      - ../test:/app/test
+      - ../data:/app/data  # Añadir volumen para datos de entrenamiento
+      - ../logs:/app/logs  # Añadir volumen para logs
+    command: ["poetry", "run", "python3", "src/app.py"]
+    networks:
+      - honey-network
+    restart: always  # <-- Añadir esta línea
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  # Nuevo servicio para entrenamiento
+  trainer:
+    runtime: nvidia
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile.trainer
+    env_file:
+      - ../.env
+    environment:
+      # Configuración de threads para optimizar CPU
+      - OMP_NUM_THREADS=4
+      - MKL_NUM_THREADS=4
+      - TF_NUM_INTEROP_THREADS=4
+      - TF_NUM_INTRAOP_THREADS=4
+      - KMP_BLOCKTIME=1
+      - KMP_AFFINITY=granularity=fine,compact,1,0
+      - KMP_SETTINGS=1
+    volumes:
+      - ../src:/app/src
+      - ../model:/app/model
+      - ../data:/app/data
+      - ../logs:/app/logs
+      - ../notebooks:/app/notebooks  # Para Jupyter notebooks si quieres experimentar
+      - ../keras_cache:/root/.keras  # <-- Esta línea es para conservar los pesos iniciales
+    networks:
+      - honey-network
+    deploy:
+      resources:
+        limits:
+          memory: 14G
+          cpus: '4'
+        reservations:
+          memory: 8G
+          cpus: '4'
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    stdin_open: true  # Para mantener abierto si necesitas interactuar
+    tty: true
+    # Comando por defecto - puedes cambiarlo según necesites
+    command: ["poetry", "run", "python3", "src/train_segmentation_models.py", "--help"]
+    # Si quieres tener una sesión interactiva:
+    # command: ["/bin/bash"]
+
+  # Opcional: servicio para Jupyter Lab (ideal para experimentación)
+  jupyter:
+    runtime: nvidia
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile.trainer
+    env_file:
+      - ../.env
+    volumes:
+      - ../src:/app/src
+      - ../model:/app/model
+      - ../data:/app/data
+      - ../logs:/app/logs
+      - ../notebooks:/app/notebooks
+    networks:
+      - honey-network
+    ports:
+      - "8888:8888"  # Puerto para Jupyter
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    command: ["poetry", "run", "jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
+
+networks:
+  honey-network:
+    driver: bridge

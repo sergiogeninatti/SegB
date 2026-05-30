@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg-info/
+*.egg
+.eggs/
+dist/
+build/
+venv/
+.venv/
+env/
+.env
+
+# Poetry
+poetry.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Project specific
+debug/
+fotos/
+logs/
+data/
+notebooks/
+model/*.h5
+model/*.pb
+*.log
+
+# Docker
+.docker/tmp/
+
+# OS
+.DS_Store
+Thumbs.db
