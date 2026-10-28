@@ -1,222 +1,213 @@
-# Manual de Usuario: SegB
+# SegB User Manual
 
-**SegB** es un bot de Telegram para el análisis automático de imágenes de panales de abejas. Proporciona a apicultores e investigadores estimaciones cuantitativas de:
+**SegB** is a Telegram bot for the automatic analysis of images of honeycombs. It provides beekeepers and researchers with quantitative estimates of:
 
-- Área de miel operculada (cm² y porcentaje)
-- Área de celdas construidas
-- Cálculo automático de escala a partir de las dimensiones del cuadro
-
----
-
-## 1. Requisitos
-
-- Aplicación Telegram instalada ([Android](https://play.google.com/store/apps/details?id=org.telegram.messenger) | [iOS](https://apps.apple.com/app/telegram/id686449807))
-- Cuenta de Telegram activa
-- Conexión a internet para el envío de imágenes
+- Area of capped honey (cm² and percentage)
+- Area of built comb
+- Automatic scale calculation based on the frame dimensions
 
 ---
 
-## 2. Primeros pasos
+## 1. Requirements
 
-### 2.1. Localizar el bot
+- Telegram App ([Android](https://play.google.com/store/apps/details?id=org.telegram.messenger) | [iOS](https://apps.apple.com/app/telegram/id686449807))
+- Active Telegram account
+- Internet connection for sending images
 
-Abra Telegram y busque: **`@abejagraficabot`**
+---
 
-### 2.2. Iniciar la conversación
+## 2. Getting Started
 
-Presione **"Iniciar"** o envíe el comando `/start`
+### 2.1. Search for the bot
 
-### 2.3. Solicitar registro
+Open Telegram and search for: **`@abejagraficabot`**
 
-Envíe el comando: **`/login`**
+### 2.2. Start the conversation
 
-### 2.4. Esperar la aprobación
+Press **“Start”** or enter the command `/start`
 
-El administrador del sistema recibirá su solicitud y le notificará una vez aprobada.
+### 2.3. Request Registration
 
-### 2.5. Configurar las dimensiones del cuadro
+Enter the command: **`/login`**
 
-Una vez aprobado, envíe los siguientes comandos (valores en centímetros):
+### 2.4. Wait for approval
+
+The system administrator will receive your request and notify you once it has been approved.
+
+### 2.5. Set the dimensions of the frame
+
+Once the administrator has approved the use of the bot, send the following commands (values in centimeters):
 /width 45
 /height 20
 
-text
-
-Verifique la configuración con:
+Check the settings using:
 /frame
 
-text
 
-> **Nota:** Las dimensiones se almacenan de forma permanente. Este paso solo es necesario una vez por apiario, siempre que todos los cuadros tengan las mismas dimensiones.
 
----
-
-## 3. Uso del bot
-
-### 3.1. Envío de una imagen para análisis
-
-**Importante:** Envíe la imagen como **documento**, no como foto. Telegram comprime las fotos, lo que reduce la resolución y puede afectar la precisión del análisis.
-
-**Procedimiento:**
-
-1. Abra el chat con `@abejagraficabot`
-2. Toque el icono de adjuntar (📎) → **"Documento"** (o "File")
-3. Seleccione la imagen del cuadro de panal desde su galería
-4. Envíe
-
-El bot procesará la imagen y devolverá los resultados en pocos segundos.
-
-> Si envía la imagen como foto, el bot la procesará pero mostrará una advertencia sobre la posible pérdida de precisión.
+> **Note:** The dimensions are stored permanently. This step is only necessary once per apiary, provided that all frames have the same dimensions.
 
 ---
 
-## 4. Referencia de comandos
+## 3. Using the bot
 
-### 4.1. Comandos generales
+### 3.1. Submitting an Image for Analysis
 
-| Comando | Descripción |
-|---------|-------------|
-| `/start` | Mensaje de bienvenida e información del sistema |
-| `/login` | Solicitar registro de usuario |
-| `/logout` | Eliminar su registro del bot |
-| `/config` | Mostrar la configuración actual |
-| `/reset_config` | Restaurar la configuración por defecto |
-| `/stats` | Mostrar estadísticas del sistema (modelos disponibles, etc.) |
+**Important:** Send the image as a **document**, not as a photo. Telegram compresses photos, which reduces the resolution and may affect the accuracy of the analysis.
 
-### 4.2. Comandos de configuración
+**Steps:**
 
-| Comando | Descripción |
-|---------|-------------|
-| `/set <parámetro> <valor>` | Modificar parámetros de configuración (ver Sección 5) |
-| `/set_model <categoría> <variante>` | Cambiar el modelo de IA para una categoría |
-| `/set_individual <categoría> <true/false>` | Activar/desactivar resultados individuales por modelo |
-| `/set_color <categoría> <R,G,B>` | Cambiar el color de la máscara de superposición para una categoría |
+1. Open the chat with `@abejagraficabot`
+2. Tap the attach icon (📎) → **“Document”** (or “File”)
+3. Select the image of the honeycomb from your gallery
+4. Upload the image
 
-### 4.3. Comandos de dimensiones
+The bot will process the image and return the results in a few seconds.
 
-| Comando | Descripción |
-|---------|-------------|
-| `/width <cm>` | Establecer el ancho del cuadro en centímetros (ej. `/width 50`) |
-| `/height <cm>` | Establecer el alto del cuadro en centímetros |
-| `/frame` | Mostrar las dimensiones actuales del cuadro |
+> If the user submits the image as a photo, the bot will process it but display a warning about the potential loss of accuracy.
 
 ---
 
-## 5. Parámetros de configuración (`/set`)
+## 4. Command Reference
 
-| Parámetro | Valores | Descripción |
+### 4.1. General Commands
+
+| Command | Description |
+|---------|-------------|
+| `/start` | Welcome message and system information |
+| `/login` | Request user registration |
+| `/logout` | Remove your registration from the bot |
+| `/config` | Show current settings |
+| `/reset_config` | Restore default settings |
+| `/stats` | Show system statistics (available models, etc.) |
+
+### 4.2. Configuration Commands
+
+| Command | Description |
+|---------|-------------|
+| `/set <parameter> <value>` | Modify configuration parameters (see Section 5) |
+| `/set_model <category> <variant>` | Change the AI model for a category |
+| `/set_individual <category> <true/false>` | Enable/disable individual results per model |
+| `/set_color <category> <R,G,B>` | Change the color of the overlay mask for a category |
+
+### 4.3. Dimension Commands
+
+| Command | Description |
+|---------|-------------|
+| `/width <cm>` | Set the frame width in centimeters (e.g., `/width 50`) |
+| `/height <cm>` | Set the frame height in centimeters |
+| `/frame` | Display the current frame dimensions |
+
+---
+
+## 5. Configuration Parameters (`/set`)
+
+| Parameter | Values | Description |
 |-----------|---------|-------------|
-| `auto_combined` | `true` / `false` | Enviar automáticamente la imagen combinada con todas las detecciones |
-| `intensity` | `0.0` – `1.0` | Intensidad del resaltado en las imágenes de resultado |
-| `threshold` | `0.0` – `1.0` | Umbral de confianza para las detecciones (recomendado: `0.5`) |
-| `format` | `photo` / `document` | Formato de salida para las imágenes de resultado |
-| `verbose` | `true` / `false` | Mostrar información detallada del procesamiento |
-| `quality` | `1` – `100` | Calidad JPEG de las imágenes de salida |
-| `max_size` | `320` – `4096` | Tamaño máximo de la imagen en píxeles |
-| `notify_start` | `true` / `false` | Enviar notificación cuando comienza el análisis |
-| `notify_complete` | `true` / `false` | Enviar notificación cuando finaliza el análisis |
-| `notify_error` | `true` / `false` | Enviar notificación si ocurre un error |
+| `auto_combined` | `true` / `false` | Automatically send the combined image with all detections |
+| `intensity` | `0.0` – `1.0` | Highlight intensity in the result images |
+| `threshold` | `0.0` – `1.0` | Confidence threshold for detections (recommended: `0.5`) |
+| `format` | `photo` / `document` | Output format for result images |
+| `verbose` | `true` / `false` | Show detailed processing information |
+| `quality` | `1` – `100` | JPEG quality of the output images |
+| `max_size` | `320` – `4096` | Maximum image size in pixels |
+| `notify_start` | `true` / `false` | Send a notification when the analysis begins |
+| `notify_complete` | `true` / `false` | Send a notification when the analysis finishes |
+| `notify_error` | `true` / `false` | Send a notification if an error occurs |
 
-**Ejemplos:**
+**Examples:**
 /set auto_combined false
 /set intensity 0.6
 /set threshold 0.7
 /set format document
 
-text
+---
+
+## 6. Color Customization
+
+Use `/set_color` to change the colors of the overlay masks (Note that RGB values range from 0 to 255):
+/set_color frame 255,0,0 # Red for the frame
+/set_color cells 0,0,255 # Blue for built cells
+/set_color honey 0,255,0 # Green for honey
 
 ---
 
-## 6. Personalización de colores
+## 7. Results
 
-Utilice `/set_color` para cambiar los colores de las máscaras de superposición:
-/set_color frame 255,0,0 # Rojo para el marco
-/set_color cells 0,0,255 # Azul para celdas construidas
-/set_color honey 0,255,0 # Verde para la miel
+After sending an image, the bot responds with:
 
-text
+### 7.1. Text Summary (Example)
+✅ Processing complete
+• Time: 3.2s
+📏 Frame: 900 cm²
+🔨 Cells: 720 cm² (80.0% of the frame)
+🍯 Honey: 450 cm² (50.0% of the cells)
 
-Los valores RGB van de 0 a 255.
 
----
+### 7.2. Images with Masks (Default Colors)
 
-## 7. Interpretación de los resultados
+- **Red**: Frame (FrameModel)
+- **Blue**: Built cells (BuiltModel)
+- **Green**: Caped honey (HoneyModel)
 
-Tras enviar una imagen, el bot devuelve:
+### 7.3. Combined image (if `auto_combined` is enabled)
 
-### 7.1. Resumen de texto (ejemplo)
-✅ Procesamiento completado
-• Tiempo: 3.2s
-📏 Marco: 900 cm²
-🔨 Celdas: 720 cm² (80.0% del marco)
-🍯 Miel: 450 cm² (50.0% de las celdas)
-
-text
-
-### 7.2. Imágenes con máscaras (colores por defecto)
-
-- **Rojo**: Marco (FrameModel)
-- **Azul**: Celdas construidas (BuiltModel)
-- **Verde**: Miel operculada (HoneyModel)
-
-### 7.3. Imagen combinada (si `auto_combined` está activado)
-
-Una única imagen que muestra todas las detecciones superpuestas.
+A single image showing all detections overlaid.
 
 ---
 
-## 8. Preguntas frecuentes (FAQ)
+## 8. Frequently Asked Questions (FAQ)
 
-**8.1. ¿El bot almacena mis imágenes?**
+**8.1. Does the Telegram bot store my images?**
 
-Sí. Las imágenes se almacenan de forma anónima exclusivamente para fines de investigación (validación de modelos, ampliación del conjunto de datos). Puede solicitar la eliminación de sus datos contactando al administrador.
+If you agree to use this bot, images may be stored anonymously. These images will be used solely and exclusively for research purposes to improve the quality of the results. Users may request the deletion of their data by contacting the administrator.
 
-**8.2. ¿Qué debo hacer si el bot no responde?**
+**8.2. What should I do if the Telegram bot isn't responding?**
 
-1. Verifique su conexión a internet.
-2. Si pasa más de un minuto, reenvíe la imagen.
-3. Si el problema persiste, contacte al administrador por correo electrónico.
+1. Check your Internet connection.
+2. If it takes more than a minute, resend the image.
+3. If the problem persists, contact the administrator.
 
-**8.3. ¿Puedo enviar varias imágenes a la vez?**
+**8.3. Can I send multiple images at once?**
 
-Sí. El bot procesa las imágenes de forma secuencial y devuelve los resultados para cada una.
+Yes. The bot processes the images sequentially and returns the results for each one.
 
-**8.4. ¿Por qué aparece el mensaje "You are not registered"?**
+**8.4. Why does the message “You are not registered” appear?**
 
-Aún no ha completado el registro. Envíe `/login` y espere la aprobación del administrador.
+Registration is not yet complete. Submit `/login` and wait for the administrator's approval.
 
-**8.5. ¿Qué significa "Frame not valid"?**
+**8.5. What does the message “Frame not valid” mean?**
 
-El modelo de detección de marco identificó más de una región como límite del marco. Asegúrese de que la imagen incluya el marco completo, sin sombras ni oclusiones que puedan dividirlo.
+The frame detection model identified more than one region as the frame boundary. Make sure the image includes the entire frame, without any shadows or occlusions that might split it.
 
-**8.6. ¿Puedo usar el bot sin conexión a internet?**
+**8.6. Can I use the bot without an internet connection?**
 
-No. El bot requiere conexión a internet para transmitir las imágenes al servidor de procesamiento.
+Currently, an internet connection is required to transmit the images to the processing server.
 
-**8.7. ¿Qué precisión tienen los resultados?**
+**8.7. How accurate are the results?**
 
-La precisión depende de la calidad de la imagen. En condiciones óptimas (buena iluminación, enfoque nítido, marco completo), la precisión de segmentación supera el 90%.
+Accuracy depends on image quality. Under optimal conditions (good lighting, sharp focus, full frame), segmentation accuracy exceeds 90%.
 
-**8.8. ¿Puedo cambiar el modelo de IA?**
+**8.8. Can I change the AI model?**
 
-Sí. Utilice `/set_model <categoría> <variante>` para seleccionar entre las arquitecturas disponibles (ej. `unet`, `fpn`, `linknet`). El valor por defecto es `unet`.
-
----
-
-## 9. Soporte técnico
-
-Para incidencias o sugerencias:
-
-- **Correo electrónico:** `foco@fceia.unr.edu.ar`
-- **Gestor de incidencias en GitHub:** `https://github.com/sergiogeninatti/SegB/issues`
+Yes. Use `/set_model <category> <variant>` to choose from the available architectures (e.g., `unet`, `fpn`, `linknet`). The default value is `unet`. Please note that different models may result in a longer response time for the results.
 
 ---
 
-## 10. Historial de versiones
+## 9. Technical Support
 
-| Versión | Fecha | Resumen de cambios |
+For issues or suggestions:
+
+- **e-mail:** `foco@fceia.unr.edu.ar`
+- **Issue Tracker on GitHub:** `https://github.com/sergiogeninatti/SegB/issues`
+
+---
+
+## 10. Release History
+
+| Version | Date | Summary of Changes |
 |---------|-------|---------------------|
-| v1.0.0 | Mayo 2026 | Versión inicial estable. Modelos Frame, Built y Honey con comandos configurables. |
+| v1.0.0 | May 2026 | Stable Release. FrameModel, BuiltModel, and ConMod models with configurable commands. |
 
 ---
 
